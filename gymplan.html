@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gym Plan</title>
+
+<style>
+:root {
+  --bg: #0b1220;
+  --card: #111827;
+  --accent: #22c55e;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+  text-align: center;
+  margin: 6px 0 2px;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.3);
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.exercise {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.exercise label {
+  flex: 1;
+  cursor: pointer;
+}
+
+.exercise span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
+
+ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  color: #052e16;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Gym Plan</h1>
+<div class="subtitle">Tap to tick · progress auto‑saved</div>
+
+<div class="card">
+<h2>Weekly Layout</h2>
+<ul>
+  <li>Mon – Lower Body</li>
+  <li>Wed – Upper Body</li>
+  <li>Fri – Full Body Power</li>
+  <li>Sat – Beach / Agility (optional)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Warm‑Up</h2>
+<ul>
+  <li>3–5 min bike or row</li>
+  <li>Leg swings, arm circles</li>
+  <li>Cat–cow → bird dog</li>
+  <li>2×10 bridges + clamshells</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Day 1 – Lower Body</h2>
+<div class="exercise"><input type="checkbox" id="d1-1"><label for="d1-1">Trap Bar Deadlift / RDL <span>4×6–8</span></label></div>
+<div class="exercise"><input type="checkbox" id="d1-2"><label for="d1-2">Squat (high bar / safety) <span>4×6–8</span></label></div>
+<div class="exercise"><input type="checkbox" id="d1-3"><label for="d1-3">Single‑Leg Hip Thrust <span>3×10–12</span></label></div>
+<div class="exercise"><input type="checkbox" id="d1-4"><label for="d1-4">Bulgarian Split Squat <span>3×8–10</span></label></div>
+<div class="exercise"><input type="checkbox" id="d1-5"><label for="d1-5">Bird Dog / Dead Bug <span>3×10–12</span></label></div>
+</div>
+
+<div class="card">
+<h2>Day 2 – Upper Body</h2>
+<div class="exercise"><input type="checkbox" id="d2-1"><label for="d2-1">Pull‑Ups / Lat Pulldown <span>4×8–10</span></label></div>
+<div class="exercise"><input type="checkbox" id="d2-2"><label for="d2-2">DB Bench / Incline <span>3×8–10</span></label></div>
+<div class="exercise"><input type="checkbox" id="d2-3"><label for="d2-3">Cable / DB Row <span>3×10–12</span></label></div>
+<div class="exercise"><input type="checkbox" id="d2-4"><label for="d2-4">Overhead Press <span>3×8–10</span></label></div>
+<div class="exercise"><input type="checkbox" id="d2-5"><label for="d2-5">Pallof / Med Ball <span>3×12–15</span></label></div>
+</div>
+
+<div class="card">
+<h2>Day 3 – Power</h2>
+<div class="exercise"><input type="checkbox" id="d3-1"><label for="d3-1">Power Clean / KB Swings <span>4×5–6</span></label></div>
+<div class="exercise"><input type="checkbox" id="d3-2"><label for="d3-2">Box Jumps <span>3×6–8</span></label></div>
+<div class="exercise"><input type="checkbox" id="d3-3"><label for="d3-3">Walking Lunges + Twist <span>3×10</span></label></div>
+<div class="exercise"><input type="checkbox" id="d3-4"><label for="d3-4">Single‑Arm DB Row <span>3×10–12</span></label></div>
+<div class="exercise"><input type="checkbox" id="d3-5"><label for="d3-5">Woodchoppers <span>3×15</span></label></div>
+</div>
+
+<button onclick="resetChecks()">Reset Workout</button>
+
+<footer>
+Progress saves automatically · Phone‑friendly
+</footer>
+
+<script>
+const boxes = document.querySelectorAll('input[type="checkbox"]');
+
+boxes.forEach(box => {
+  box.checked = localStorage.getItem(box.id) === "true";
+  box.addEventListener('change', () => {
+    localStorage.setItem(box.id, box.checked);
+  });
+});
+
+function resetChecks() {
+  boxes.forEach(box => {
+    box.checked = false;
+    localStorage.removeItem(box.id);
+  });
+}
+</script>
+
+</body>
+</html>
